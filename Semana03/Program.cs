@@ -54,7 +54,7 @@ class Program
             connection.Open();
 
             // Consulta SQL para seleccionar datos
-            string query = "SELECT IdTRabajador,Nombre,Apellidos, Sueldo, FechadeNacimiento FROM Trabajadores";
+            string query = "SELECT IdTRabajador,Nombre, Apellidos, Sueldo, FechadeNacimiento FROM Trabajadores";
 
             using (SqlCommand command = new SqlCommand(query, connection))
             {
@@ -69,9 +69,10 @@ class Program
 
                             trabajadores.Add(new Trabajadores
                             {
-                                Id = (int)reader["IdEmpleado"],
+                                Id = (int)reader["IdTRabajador"],
                                 Nombre = reader["Nombre"].ToString(),
-                                Cargo = reader["Cargo"].ToString()
+                                Apellidos = reader["Apellidos"].ToString(),
+                                
                             });
 
                         }
@@ -84,7 +85,7 @@ class Program
 
 
         }
-        return Trabajadores;
+        return trabajadores;
 
     }
 
