@@ -7,7 +7,7 @@ namespace Semana03;
 class Program
 {
     // Cadena de conexión a la base de datos
-    public static string connectionString = "Data Source=LAB1504-28\\SQLEXPRESS;Initial Catalog=Neptuno2;User ID=usertecsup;Password=123456";
+    public static string connectionString = "Data Source=LAB1504-28\\SQLEXPRESS;Initial Catalog=Tecsup2023DB;User ID=usertecsup;Password=123456";
 
 
     static void Main()
@@ -27,7 +27,7 @@ class Program
             connection.Open();
 
             // Consulta SQL para seleccionar datos
-            string query = "SELECT * FROM Trabajador";
+            string query = "SELECT * FROM Trabajadores";
 
             // Crear un adaptador de datos
             SqlDataAdapter adapter = new SqlDataAdapter(query, connection);
@@ -46,7 +46,7 @@ class Program
     //De forma conectada
     private static List<Trabajadores> ListarTrabajadoresListaObjetos()
     {
-        List<Trabajadores> empleados = new List<Trabajadores>();
+        List<Trabajadores> trabajadores = new List<Trabajadores>();
 
         using (SqlConnection connection = new SqlConnection(connectionString))
         {
@@ -54,7 +54,7 @@ class Program
             connection.Open();
 
             // Consulta SQL para seleccionar datos
-            string query = "SELECT IdEmpleado,Nombre,Cargo FROM Empleados1";
+            string query = "SELECT IdTRabajador,Nombre,Apellidos, Sueldo, FechadeNacimiento FROM Trabajadores";
 
             using (SqlCommand command = new SqlCommand(query, connection))
             {
@@ -67,7 +67,7 @@ class Program
                         {
                             // Leer los datos de cada fila
 
-                            empleados.Add(new Trabajadores
+                            trabajadores.Add(new Trabajadores
                             {
                                 Id = (int)reader["IdEmpleado"],
                                 Nombre = reader["Nombre"].ToString(),
